@@ -2,6 +2,8 @@ import React from 'react';
 import './sidebar.css'; // Correct path if the CSS file is in the same directory as sidebar.js
 import { IonIcon } from '@ionic/react';
 import { pieChartOutline, peopleOutline, receiptOutline, peopleCircleOutline, rocketOutline, heartHalfOutline, logOutOutline } from 'ionicons/icons';
+import logo from '../assets/logobgremoved.png';
+
 
 
 const Sidebar = () => {
@@ -12,7 +14,7 @@ const Sidebar = () => {
                     <li>
                         <a href="#">
                             <span className="icon">
-                             {/**  <img src={logo} alt="Company Logo" style={{ width: '80px', height: '80px' }} />*/}   
+                             {/** */}    <img src={logo} alt="Company Logo" style={{ width: '80px', height: '80px' }} />
                             </span>
                             <span className="title">Project Manager</span>
                         </a>
