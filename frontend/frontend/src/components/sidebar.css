@@ -140,3 +140,69 @@ body {
   box-shadow: 35px -35px 0 10px var(--white);
   pointer-events: none;
 }
+
+/* Header styles */
+.header {
+    display: flex;
+    margin-left: 300px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--blue);
+    color: var(--white);
+    position: fixed; /* Ensures header stays at the top */
+    width: calc(100% - 300px); /* Adjusts width considering sidebar width */
+    top: 0; /* Positions the header at the top */
+    z-index: 1000; /* Keeps the header above other content */
+  }
+  
+  /* Left side of the header */
+  .header-left {
+    flex: 1;
+  }
+  
+  .search-bar {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+    max-width: 250px; /* Limits the maximum width of the search bar */
+  }
+  
+  /* Right side of the header */
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header-icon {
+    font-size: 24px;
+    margin-left: 15px;
+    cursor: pointer;
+    color: var(--white);
+  }
+  
+  .profile-name {
+    margin-left: 15px;
+    font-weight: bold;
+    color: var(--white);
+  }
+  
+  /* Responsive header styles */
+  @media (max-width: 1024px) {
+    .header {
+      width: calc(100% - 250px); /* Adjusts width for smaller screens */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .header {
+      width: calc(100% - 200px); /* Further adjusts width for mobile screens */
+    }
+  
+    .search-bar {
+      max-width: 150px; /* Reduces max-width for smaller screens */
+    }
+  }
+  
+  
