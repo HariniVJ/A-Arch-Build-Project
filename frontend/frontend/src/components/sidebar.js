@@ -37,8 +37,13 @@ const roleImages = {
     "Site Manager": siteManagerPic,
 };
 
-function Sidebar({ role, userName }) {
+function Sidebar({ role, userName, onSectionChange }) {
     const [activeMenu, setActiveMenu] = useState(null);
+
+    const handleMenuClick = (index, sectionName) => {
+        setActiveMenu(prevIndex => (prevIndex === index ? null : index));
+        onSectionChange(sectionName); // Notify the parent component of the section change
+    };
 
     const sidebarStyle = {
         background: 'linear-gradient(250deg, #211C6A, #4137D0)',
@@ -50,10 +55,6 @@ function Sidebar({ role, userName }) {
     };
 
     const items = menuItems[role] || [];
-
-    const handleMenuClick = (index) => {
-        setActiveMenu(prevIndex => (prevIndex === index ? null : index));
-    };
 
     return (
         <div style={{ paddingLeft: '220px', paddingTop: '56px' }}>
@@ -90,7 +91,7 @@ function Sidebar({ role, userName }) {
                                         <a 
                                             className="nav-link text-white text-center text-sm-start" 
                                             href={`#submenu-${index}`} 
-                                            onClick={() => handleMenuClick(index)}
+                                            onClick={() => handleMenuClick(index, item.name)} // Pass the section name
                                             aria-expanded={activeMenu === index ? "true" : "false"}
                                         >
                                             <i className={`bi ${item.icon}`}></i>
@@ -111,7 +112,7 @@ function Sidebar({ role, userName }) {
                                         </ul>
                                     </div>
                                 ) : (
-                                    <a href={item.link} className="nav-link text-white text-center text-sm-start" aria-current="page">
+                                    <a href={item.link} className="nav-link text-white text-center text-sm-start" aria-current="page" onClick={() => handleMenuClick(index, item.name)}>
                                         <i className={`bi ${item.icon}`}></i>
                                         <span className='ms-2 d-none d-sm-inline'>{item.name}</span>
                                     </a>
