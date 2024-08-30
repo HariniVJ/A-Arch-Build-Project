@@ -57,7 +57,7 @@ function Sidebar({ role, userName, onSectionChange }) {
     const items = menuItems[role] || [];
 
     return (
-        <div style={{ paddingLeft: '220px', paddingTop: '56px' }}>
+       
             <div className='d-flex flex-column justify-content-between min-vh-100' style={sidebarStyle}>
                 <div className='d-flex flex-column align-items-center pt-4'>
                     {/* Role Name */}
@@ -138,7 +138,7 @@ function Sidebar({ role, userName, onSectionChange }) {
                     </ul>
                 </div>
             </div>
-        </div>
+       
     );
 }
 
