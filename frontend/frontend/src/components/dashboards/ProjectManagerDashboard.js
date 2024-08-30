@@ -19,7 +19,7 @@ function ProjectManagerDashboard() {
                 onSectionChange={handleSectionChange}
             />
             
-            <div style={{ paddingLeft: '220px', marginTop : '10px' }}>
+            <div style={{ paddingLeft: '220px', marginTop: '10px' }}>
                 {/* Conditionally render the form when the Inspections section is active */}
                 {activeSection === 'Inspection' && (
                     <div style={{ padding: '20px' }}>
