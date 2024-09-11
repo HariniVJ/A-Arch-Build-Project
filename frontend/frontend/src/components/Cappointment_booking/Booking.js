@@ -9,11 +9,6 @@ const CrossedOutDate = styled.div`
   text-decoration: line-through;
   color: red;
 `;
-<script>
-    console.console.log();
-    
-</script>
-
 export default function Booking() {
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
