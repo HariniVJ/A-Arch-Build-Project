@@ -11,6 +11,7 @@ function CRMDashboard() {
             
         </div>
     );
+
 }
 
 export default CRMDashboard;
