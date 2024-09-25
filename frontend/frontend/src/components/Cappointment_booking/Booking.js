@@ -3,12 +3,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import styled from 'styled-components';
+import './Booking.css'; 
 
 // Define styled component for crossed-out dates
 const CrossedOutDate = styled.div`
   text-decoration: line-through;
   color: red;
 `;
+
+
 export default function Booking() {
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
@@ -79,6 +82,19 @@ export default function Booking() {
                     },
                     body: JSON.stringify(formData),
                 });
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(formData.email)) {
+        alert("Please enter a valid email address.");
+        return; // Exit if email is invalid
+    }
+
+    const phonePattern = /^\d{10}$/; // Assuming a 10-digit phone number
+    if (!phonePattern.test(formData.phoneNumber)) {
+        alert("Please enter a valid phone number (10 digits).");
+        return; // Exit if phone number is invalid
+    }
+
+
 
                 if (response.ok) {
                     const updatedData = await response.json();
@@ -99,6 +115,7 @@ export default function Booking() {
         } else {
             setError("Please fill in all required fields");
         }
+        console.log("Form submitted successfully!", formData);
     };
 
     const handleDownloadPDF = () => {
@@ -200,6 +217,23 @@ export default function Booking() {
         minHeight: '100vh',
         padding: '20px'
     };
+    const handleDateSelection = (e) => {
+        const selectedDate = e.target.value;
+        
+        // Check if the selected date is booked
+        if (isDateBooked(selectedDate)) {
+            alert("This date is already booked. Please select another date.");
+            setFormData({ ...formData, preferredDate: "" }); // Clear the selection
+            setError("This date is already booked. Please choose another date.");
+        } else {
+            setError("");
+            setFormData({ ...formData, preferredDate: selectedDate });
+        }
+    };
+
+    
+    
+      
 
     return (
         <div style={backgroundStyle} className="container mt-5">
@@ -280,17 +314,18 @@ export default function Booking() {
                             <div className="card-body">
                                 <h3>Step 2: Appointment Details</h3>
                                 <div className="form-group">
-                                    <label>Preferred Date</label>
-                                    <input
+                             <label>Preferred Date</label>
+                             <input
                                         type="date"
-                                        className="form-control"
+                                        className={`form-control ${formData.preferredDate ? (isDateBooked(formData.preferredDate) ? "is-invalid" : "is-valid") : ""}`}
                                         name="preferredDate"
                                         value={formData.preferredDate}
-                                        onChange={handleChange}
+                                        onChange={handleDateSelection}
                                         min={today}
                                         required
                                     />
-                                </div>
+                                        </div>
+
                                 <div className="form-group">
                                     <label>Preferred Time</label>
                                     <input
