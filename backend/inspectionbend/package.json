@@ -1,0 +1,14 @@
+{
+  "name": "inspectionbend",
+  "version": "1.0.0",
+  "description": "inspection backedn",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dayana",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
