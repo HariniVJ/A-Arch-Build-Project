@@ -1,45 +1,44 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const bcrypt = require("bcrypt");
+const express = require('express');
+const cors = require('cors');
+const { MongoClient } = require('mongodb');
 
 const app = express();
+const PORT = 5000;
+
+// MongoDB connection string
+const uri = 'mongodb://localhost:27017/admin'; // Your existing database
+const client = new MongoClient(uri);
+
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); // Use express.json() for parsing JSON request bodies
 
-// Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/login', { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log("MongoDB connected"))
-    .catch(err => console.error("MongoDB connection error:", err));
-
-// User Schema
-const userSchema = new mongoose.Schema({
-    username: String,
-    password: String,
-});
-
-const UserModel = mongoose.model("users", userSchema);
-
-// POST /login route
-app.post('/login', async (req, res) => {
+// Login endpoint
+app.post('/api/login', async (req, res) => {
     const { username, password } = req.body;
+    console.log('Login request received:', req.body); // Debug log
 
     try {
-        const user = await UserModel.findOne({ username });
+        await client.connect();
+        const database = client.db('admin'); // Use the existing admin database
+        const usersCollection = database.collection('user'); // User collection
 
-        if (user && await bcrypt.compare(password, user.password)) {
-            res.json({ message: "Login successful", success: true });
+        // Now query the user based on the username from the request
+        const user = await usersCollection.findOne({ username: username });
+
+        // Validate user credentials
+        if (user && user.password === password) {
+            return res.status(200).json({ role: user.role });
         } else {
-            res.json({ message: "Invalid username or password", success: false });
+            return res.status(401).json({ message: 'Invalid username or password' });
         }
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: "Internal server error" });
+    } catch (error) {
+        console.error('Error:', error); // Log the error for debugging
+        return res.status(500).json({ message: 'Server error', error });
+    } finally {
+        await client.close();
     }
 });
 
-// Start the server
-const port = 3000;
-app.listen(port, () => {
-    console.log("Server is listening on port " + port);
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 });

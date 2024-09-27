@@ -1,18 +1,70 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import introvideo from './assets/introvideo.mp4';
-import logo from './assets/logo.png'; // Import your logo image
+import logo from './assets/logo.png'; 
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom'; 
 
 function LoginPage() {
-    // Inline styles
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        const trimmedUsername = username.trim();
+        const trimmedPassword = password.trim();
+
+        console.log("Logging in with:", { trimmedUsername, trimmedPassword });
+
+        try {
+            const response = await axios.post('http://localhost:5000/api/login', {
+                username: trimmedUsername,
+                password: trimmedPassword,
+            });
+
+            if (response.status === 200) {
+                const role = response.data.role;
+                console.log("Login successful, user role:", role);
+
+                switch (role) {
+                    case 'project-manager':
+                        navigate('/project-manager');
+                        break;
+                    case 'financial-manager':
+                        navigate('/financial-manager');
+                        break;
+                    case 'architect':
+                        navigate('/architect');
+                        break;
+                    case 'crm':
+                        navigate('/crm');
+                        break;
+                    case 'quality-assurance':
+                        navigate('/quality-assurance');
+                        break;
+                    case 'site-manager':
+                        navigate('/site-manager');
+                        break;
+                    default:
+                        setError('Invalid user role');
+                }
+            }
+        } catch (error) {
+            console.error('Error response:', error.response);
+            setError(error.response?.data?.message || 'Login failed');
+        }
+    };
+
     const containerStyle = {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         height: '100vh',
         width: '100vw',
+        background: 'linear-gradient(180deg, #EFF396, #59B4C3)',
     };
 
     const contentStyle = {
@@ -43,8 +95,8 @@ function LoginPage() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#f8f9fa',
         height: '100%',
+        background: 'linear-gradient(180deg, #EFF396, #59B4C3)',
     };
 
     const cardInnerStyle = {
@@ -59,37 +111,9 @@ function LoginPage() {
 
     const logoStyle = {
         display: 'block',
-        margin: '0 auto 10px', // Center the logo and add margin below
-        width: '150px', // Adjust the size of the logo
+        margin: '0 auto 10px',
+        width: '150px',
         height: 'auto',
-    };
-
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const navigate = useNavigate(); // Initialize useNavigate
-
-    const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent default form submission
-        try {
-            const response = await axios.post('http://localhost:3000/login', {
-                username,
-                password,
-            });
-            console.log(response.data);
-            if (response.data.success) {
-                // Check credentials and navigate accordingly
-                if (username === 'Akash') {
-                    navigate('/project-manager'); // Navigate to project manager
-                } else if (username === 'Dayana') {
-                    navigate('/architect'); // Navigate to architect
-                }
-            } else {
-                alert(response.data.message); // Alert message from server
-            }
-        } catch (error) {
-            console.error("Error during login:", error);
-            alert("An error occurred during login. Please try again.");
-        }
     };
 
     return (
@@ -106,14 +130,38 @@ function LoginPage() {
                         <img src={logo} alt="Logo" style={logoStyle} />
                         <h3 className="card-title text-center mb-4">Welcome Back</h3>
                         
+                        {error && <div className="alert alert-danger">{error}</div>} 
+
                         <form onSubmit={handleSubmit}>
                             <div className="form-group mb-3">
-                                <label htmlFor="username">Username</label>
-                                <input type="text" className="form-control" id="username" placeholder="Enter username" autoComplete='off' onChange={(e) => setUsername(e.target.value)} />
+                                <label htmlFor="username">
+                                    <i className="fas fa-user" style={{ marginRight: '8px' }}></i>
+                                    Username
+                                </label>
+                                <input 
+                                    type="text" 
+                                    className="form-control" 
+                                    id="username" 
+                                    placeholder="Enter username" 
+                                    autoComplete='off' 
+                                    value={username} 
+                                    onChange={(e) => setUsername(e.target.value)} 
+                                />
                             </div>
                             <div className="form-group mb-3">
-                                <label htmlFor="password">Password</label>
-                                <input type="password" className="form-control" id="password" placeholder="Password" autoComplete='off' onChange={(e) => setPassword(e.target.value)} />
+                                <label htmlFor="password">
+                                    <i className="fas fa-lock" style={{ marginRight: '8px' }}></i>
+                                    Password
+                                </label>
+                                <input 
+                                    type="password" 
+                                    className="form-control" 
+                                    id="password" 
+                                    placeholder="Password" 
+                                    autoComplete='off'  
+                                    value={password} 
+                                    onChange={(e) => setPassword(e.target.value)} 
+                                />
                             </div>
                             <button type="submit" className="btn btn-primary w-100" style={{ background: 'linear-gradient(180deg, #EFF396, #59B4C3)', color: 'black' }}>Login</button>
                         </form>
