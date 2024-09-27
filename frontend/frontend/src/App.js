@@ -11,6 +11,7 @@ import QualityAssuranceDashboard from './components/dashboards/QualityAssuranceD
 import SiteManagerDashboard from './components/dashboards/SiteManagerDashboard';
 import NavScrollExample from './components/navibar';
 import LoginPage from './components/login'; // Ensure the path is correct
+import InspectionsDisplay from './components/Cinspectionsschedule/InspectionsDisplay';
 
 function MainContent() {
     const location = useLocation(); // Hook must be inside Router
@@ -25,6 +26,7 @@ function MainContent() {
                 <div className="col">
                     <Routes>
                         <Route path="/" element={<LoginPage />} /> {/* Root path */}
+                        <Route path="/inspections" element={<InspectionsDisplay />} />
                         <Route path="/project-manager" element={<ProjectManagerDashboard />} />
                         <Route path="/financial-manager" element={<FinancialManagerDashboard />} />
                         <Route path="/architect" element={<ArchitectDashboard />} />
