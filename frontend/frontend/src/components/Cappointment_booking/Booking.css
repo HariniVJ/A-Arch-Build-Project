@@ -19,3 +19,103 @@
 .time-slot.selected {
     background-color: green; /* Color for the selected time slot */
 }
+.appointment-header {
+     background: linear-gradient(180deg, #EFF396, #59B4C3);
+    color: black; /* Change text color for better contrast */
+    padding: 20px; /* Add padding as needed */
+    text-align: center; /* Center the text */
+    border-radius: 8px; /* Optional: rounded corners */
+}
+.card-body {
+    background: linear-gradient(350deg, #211C6A, #4137D0);
+    color: white; /* Change text color for better contrast, adjust as necessary */
+    padding: 15px; /* Optional: Add padding */
+    border-radius: 8px; /* Optional: Rounded corners */
+}
+
+.form-group input,
+.form-group textarea {
+    background-color: #d5f1dd; /* Change the background color to #74E291 */
+    color: #000; /* Change text color for better contrast */
+    border: 1px solid #ccc; /* Optional: Add a border */
+    border-radius: 5px; /* Optional: Rounded corners */
+    padding: 10px; /* Optional: Add padding for better spacing */
+}
+
+/* Optional: Change placeholder text color */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(0, 0, 0, 0.7); /* Dark placeholder color for contrast */
+}
+
+.form-group select {
+    background-color: #d5f1dd; /* Set the background color to #74E291 */
+    color: #000; /* Change text color for better contrast */
+    border: 1px solid #ccc; /* Optional: Add a border */
+    border-radius: 5px; /* Optional: Rounded corners */
+    padding: 10px; /* Optional: Add padding for better spacing */
+}
+
+/* Optional: Change placeholder text color if needed */
+.form-group select option {
+    color: #000; /* Ensure the text color is visible for options */
+}
+
+
+.design-option {
+    background-color: #59B4C3;
+    color: #000;
+}
+
+.construction-option {
+    background-color: #74E291;
+    color: #000;
+}
+
+.both-option {
+    background-color: #EFF396;
+    color: #000;
+}
+
+.btn {
+    background: linear-gradient(180deg, #EFF396, #59B4C3); /* Set the gradient background */
+    color: #000; /* Text color for contrast */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Optional: Rounded corners */
+    padding: 10px 20px; /* Optional: Add padding for better spacing */
+    cursor: pointer; /* Change cursor to pointer */
+    transition: background 0.3s ease; /* Smooth transition effect */
+}
+
+.btn {
+    background: linear-gradient(180deg, #EFF396, #59B4C3); /* Set the gradient background */
+    color: #000; /* Text color for contrast */
+    border: 3px solid black; /* Thick black border */
+    border-radius: 5px; /* Optional: Rounded corners */
+    padding: 10px 20px; /* Optional: Add padding for better spacing */
+    cursor: pointer; /* Change cursor to pointer */
+    transition: background 0.3s ease, border-color 0.3s ease; /* Smooth transition effect */
+}
+
+/* Optional: Change button background on hover */
+.btn:hover {
+    background: linear-gradient(180deg, #59B4C3, #EFF396); /* Reverse gradient on hover */
+    border-color: #333; /* Change border color on hover for effect */
+}
+
+/* Optional: Change button background on focus */
+.btn:focus {
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Optional: Add a shadow effect */
+}
+body {
+    background-color:#004187; /* Navy blue color */
+    margin: 0; /* Remove default margin */
+    height: 100vh; /* Full height */
+    color: white; /* Optional: Change text color for better contrast */
+}
+
+/* Ensure the container fills the screen */
+.container {
+    height: 120vh; /* Full height */
+}

@@ -1,0 +1,37 @@
+/* ArchitectDashboard.css */
+
+.dashboard-container {
+    background: linear-gradient(350deg, #211C6A, #4137D0);
+    min-height: 100vh; /* Ensure it covers the full height of the viewport */
+    padding: 20px; /* Optional padding */
+    color: #ffffff; /* Change text color for contrast */
+}
+
+.appointments-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.appointment-box {
+    background: white; /* Set gradient background */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 15px;
+    width: 350px; /* Increased width for boxes */
+    height: 380px; /* Set a fixed height for the boxes */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    color: #000; /* Change text color to black */
+}
+/* YourStyles.css */
+.btn-custom {
+    background-color: #74E291; /* Set button background color to #74E291 */
+    border: none; /* Remove default border */
+    color: #000; /* Set text color to black for contrast */
+}
+
+.btn-custom:hover {
+    background-color: #5bbf75; /* Optional: Change color on hover for effect */
+    color: #000; /* Keep text color on hover */
+}
+

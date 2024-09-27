@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import styled from 'styled-components';
-import './Booking.css'; 
+import './AppointmentStyles.css'; 
 
 // Define styled component for crossed-out dates
 const CrossedOutDate = styled.div`
@@ -121,39 +121,70 @@ export default function Booking() {
     const handleDownloadPDF = () => {
         if (submittedData) {
             const doc = new jsPDF();
+    
+            // Load the logo image
+            const logoImg = new Image();
+            logoImg.src = `${process.env.PUBLIC_URL}/logo.jpg`; // Replace with your actual logo path
+            logoImg.onload = function() {
+                // Load the background image
+                const backgroundImg = new Image();
+                backgroundImg.src = `${process.env.PUBLIC_URL}/pic1.jpg`; // Replace with your actual background path
+                backgroundImg.onload = function() {
+                    // Add background image to the PDF
+                    doc.addImage(backgroundImg, 'JPG', 0, 0, 210, 297); // A4 size
+    
+                    // Adjust the logo size (width and height)
+                    const logoWidth = 30; // Set your desired width
+                    const logoHeight = 32; // Set your desired height
+    
+                    // Add logo image on top of the background
+                    doc.addImage(logoImg, 'JPG', 150, 10, logoWidth, logoHeight); // Adjust logo position and size
+    
+                    // Add the table with appointment details
+                    doc.setFontSize(16);
+                    doc.text("Appointment Overview", 10, 30); // Move text down
+    
+                    // Adjust the startY parameter to bring the table down
+                    doc.autoTable({
+                        startY: 40, // Increase this value to move the table further down
+                        head: [['Field', 'Details']],
+                        body: [
+                            ['Client Name', submittedData.clientName],
+                            ['Email', submittedData.email],
+                            ['Phone Number', submittedData.phoneNumber],
+                            ['Project Type', submittedData.projectType],
+                            ['Date of Appointment', submittedData.preferredDate],
+                            ['Time Chosen', submittedData.preferredTime],
+                            ['Purpose', submittedData.purpose]
+                        ],
+                        margin: { horizontal: 10 },
+                        styles: { fontSize: 12 },
+                        headStyles: { fillColor: [0, 102, 204], textColor: [255, 255, 255] }, // Blue header
+                        alternateRowStyles: { fillColor: [240, 240, 240] } // Light gray for alternate rows
+                    });
+    
+                    // Add confirmation message
+                    doc.setFontSize(12);
+                    doc.setTextColor(0, 128, 0); // Green color
+                    doc.text("The appointment with the architect is confirmed now.", 16, doc.autoTable.previous.finalY + 10);
 
-            // Add the table with appointment details
-            doc.setFontSize(16);
-            doc.text("Appointment Overview", 10, 10);
-
-            doc.autoTable({
-                startY: 20,
-                head: [['Field', 'Details']],
-                body: [
-                    ['Client Name', submittedData.clientName],
-                    ['Email', submittedData.email],
-                    ['Phone Number', submittedData.phoneNumber],
-                    ['Project Type', submittedData.projectType],
-                    ['Date of Appointment', submittedData.preferredDate],
-                    ['Time Chosen', submittedData.preferredTime],
-                    ['Purpose', submittedData.purpose]
-                ],
-                margin: { horizontal: 10 },
-                styles: { fontSize: 12 },
-                headStyles: { fillColor: [0, 102, 204], textColor: [255, 255, 255] }, // Blue header
-                alternateRowStyles: { fillColor: [240, 240, 240] } // Light gray for alternate rows
-            });
-
-            // Add the confirmation message
-            doc.setFontSize(12);
-            doc.setTextColor(0, 128, 0); // Green color
-            doc.text("The appointment with the architect is confirmed now.", 10, doc.autoTable.previous.finalY + 10);
-            doc.text("The final confirmation will be sent in email as soon as the architect confirms it.", 10, doc.autoTable.previous.finalY + 20);
-
-            // Save the PDF
-            doc.save("appointment_overview.pdf");
+    
+                    // Save the PDF
+                    doc.save("appointment_overview.pdf");
+                };
+                backgroundImg.onerror = function() {
+                    console.error("Error loading background image.");
+                };
+            };
+            logoImg.onerror = function() {
+                console.error("Error loading logo image.");
+            };
+        } else {
+            console.error("No submitted data available");
         }
     };
+    
+    
 
     const handleUpdate = () => {
         setFormData(submittedData);
@@ -211,7 +242,7 @@ export default function Booking() {
 
     // Style object for the background image
     const backgroundStyle = {
-        backgroundImage: `url('arc.jpg')`,
+        backgroundImage: `url('cons.jpeg')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         minHeight: '100vh',
@@ -237,7 +268,7 @@ export default function Booking() {
 
     return (
         <div style={backgroundStyle} className="container mt-5">
-            <div className="row p-3 bg-success text-light">
+            <div className="appointment-header">
                 <h1>Book Your Appointment with Our Experts</h1>
             </div>
 
@@ -294,10 +325,10 @@ export default function Booking() {
                                             required
                                         >
                                             <option value="">Select Project Type</option>
-                                            <option value="Design">Design</option>
-                                            <option value="Construction">Construction</option>
-                                            <option value="Both">Both</option>
-                                        </select>
+                                            <option value="Design" className="design-option">Design</option>
+                                            <option value="Construction" className="construction-option">Construction</option>
+                                            <option value="Both" className="both-option">Both</option>
+                                            </select>
                                     </div>
                                     <button className="btn btn-dark mt-3" onClick={handleNext}>
                                         Next
