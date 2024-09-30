@@ -1,16 +1,40 @@
-// src/components/dashboards/CRMDashboard.js
-import React from 'react';
-import Sidebar from '../sidebar';
+import React, { useState } from 'react';
+import Sidebar from '../sidebar'; // Ensure this path is correct
+import Consultation from '../Crequirements/Consultation'; // Ensure this path is correct
+import ClientCards from '../Crequirements/client'; // Ensure this path is correct
 
 function CRMDashboard() {
-    return (
-        <div>
-            <Sidebar role="CRM" userName="Taylor" />
-            
-                {/* Dashboard content goes here */}
-            
-        </div>
-    );
+  const [activeSection, setActiveSection] = useState('Client Control');
+
+  const handleSectionChange = (section) => {
+    setActiveSection(section);
+  };
+
+  const renderActiveSection = () => {
+    switch (activeSection) {
+      case 'Requirement Tracker':
+        return <Consultation />;
+
+      case 'Client Control':
+        return <ClientCards onCreateReq={() => handleSectionChange('Requirement Tracker')} />;
+
+      default:
+        return <div>Select a section from the sidebar</div>;
+    }
+  };
+
+  return (
+    <div>
+      <Sidebar
+        role="CRM"
+        userName="Taylor"
+        onSectionChange={handleSectionChange}
+      />
+      <div style={{ paddingLeft: '220px', marginTop: '100px' }}>
+        {renderActiveSection()}
+      </div>
+    </div>
+  );
 }
 
 export default CRMDashboard;

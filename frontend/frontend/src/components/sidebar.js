@@ -122,21 +122,7 @@ function Sidebar({ role, userName, onSectionChange }) {
                     </ul>
                 </div>
 
-                <div className="dropdown">
-                    <button
-                        className="btn btn-secondary dropdown-toggle text-white"
-                        type="button"
-                        id="dropdownMenuButton"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                    >
-                        <i className="bi bi-person-lines-fill"></i> <span style={{ marginLeft: '5px' }} className='fs-5 ms-3 d-none d-sm-inline'>{userName}</span>
-                    </button>
-                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a className="dropdown-item" href="#">Profile</a></li>
-                        <li><a className="dropdown-item" href="#">Logout</a></li>
-                    </ul>
-                </div>
+               
             </div>
        
     );

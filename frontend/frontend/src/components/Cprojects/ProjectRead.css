@@ -1,0 +1,179 @@
+body {
+  font-family: Arial, sans-serif;   
+  background: linear-gradient(180deg, #EFF396, #59B4C3);
+  background: 'linear-gradient(350deg, #211C6A, #4137D0)';
+
+}
+
+.container {
+  max-width: 1200px; /* Center the container and limit its width */
+  margin: 0 auto; /* Center the container */
+  padding: 20px; /* Padding around the container */
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+  border: 3px solid #32cd32; /* Thicker and more vibrant green border on hover */
+}
+
+
+h1 {
+  text-align: center; /* Center the heading */
+  margin-bottom: 20px; /* Space below the heading */
+  font-size: 2.5rem; /* Increase font size for emphasis */
+  font-weight: bold; /* Make the heading bold */
+  color: #333; /* Dark grey color for text */
+  padding: 10px 20px; /* Add padding for better spacing */
+}
+
+
+.text-danger {
+  color: #dc3545; /* Bootstrap danger text color */
+}
+
+.row {
+  display: flex; /* Use flexbox for row layout */
+  flex-wrap: wrap; /* Allow wrapping of cards */
+  justify-content: space-between; /* Space out cards evenly */
+}
+
+.col-md-4 {
+  flex: 1 1 30%; /* Allow each column to take 30% of the row space */
+  margin-bottom: 20px; /* Margin at the bottom of each card */
+}
+
+.card {
+  border: 1px solid #ddd; /* Light border around cards */
+  border-radius: 10px; /* Rounded corners */
+  overflow: hidden; /* Prevent overflow */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+  background-color: white; /* White background for cards */
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+.card-body {
+  padding: 20px; /* Padding inside card body */
+}
+
+.card-title {
+  font-size: 1.25rem; /* Font size for title */
+  font-weight: bold; /* Bold title */
+  margin-bottom: 10px; /* Space below title */
+}
+
+.card-text {
+  color: #6c757d; /* Grey text color for description */
+  margin-bottom: 10px; /* Space below each text element */
+}
+
+/* Button Styles */
+.button-container {
+  display: flex; /* Use flexbox for button layout */
+  justify-content: space-between; /* Space buttons evenly */
+  margin-top: auto; /* Push buttons to the bottom */
+}
+
+.btn-edit {
+  background-color: #007bff; /* Blue color for edit button */
+  color: white; /* White text color */
+  margin-left: 0px;
+  width: 200px;
+  height: 50px;
+  text-align: justify;
+}
+
+.btn-edit:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Existing styles for danger button */
+.btn-danger {
+  background-color: #dc3545; /* Bootstrap danger color */
+  color: white; /* White text color */
+  margin-left: 20px;
+  width: 200px;
+  height: 50px;
+  text-align: justify;
+}
+
+.btn-danger:hover {
+  background-color: #c82333; /* Darker shade on hover */
+}
+
+.btn-secondary{
+  background-color: #080163; /* Bootstrap danger color */
+  color: white; /* White text color */
+  margin-left: 20px;
+  width: 200px;
+  height: 50px;
+  text-align: justify;
+}
+
+
+/* Edit Button Styles */
+.btn-edit {
+  background-color: #2196f3; /* Blue for the edit button */
+  color: white; /* White text color */
+}
+
+.btn-edit:hover {
+  background-color: #1976d2; /* Darker blue for hover */
+}
+
+.btn btn-primary {
+  background-color: #06ed0a;
+}
+
+
+.search-container {
+  align-items: center; /* Align items vertically centered */
+}
+
+.search-input {
+  flex: 1; /* Allow the input to grow and fill available space */
+  min-width: 600px; /* Set a minimum width if needed */
+  max-width: 900px; /* Set a maximum width if needed */
+}
+
+.search-btn {
+  margin-left: 0.5rem; /* Optional: Add spacing between the input and button */
+}
+
+
+.input-group-text i {
+  margin-right: 5px; /* Add space between icon and input */
+  font-size: 1.2rem; /* Increase icon size if necessary */
+}
+
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  .col-md-4 {
+    flex: 1 1 100%; /* Full width on smaller screens */
+  }
+}
+
+/* Increase the height of the notification and stats cards */
+.large-card {
+  height: 180px; /* You can adjust the height as needed */
+  margin-bottom: 10px; /* Reduce the gap between the cards */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Optional: reduce the padding inside the cards to make more space */
+.large-card .card-body {
+  padding: 10px; /* Reduce the padding inside the card */
+}
+
+/* Further reduce margin between columns */
+.row.mb-3 .col-md-3 {
+  margin-bottom: 5px; /* Reduce the margin between the card columns */
+}
